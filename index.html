@@ -1,151 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sunflower Field</title>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
-  <style>
-    * {
-      padding: 0;
-      margin: 0;
-      box-sizing: border-box;
-    }
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunflower Animation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
-    :root {
-      --color-bg: linear-gradient(to top, #00d4ff, #000);
-      --line-color: linear-gradient(to left top, #82ff86 20%, #144425, #104e1c);
-      --flower-center: radial-gradient(circle, #000, #ff5e00);
-      --leaf-color: radial-gradient(circle, #82ff86, #104e1c);
-      --petal-color: radial-gradient(circle, #ff5e00, #ffbb00);
-    }
+    <style>
+      * { padding: 0; margin: 0; box-sizing: border-box; }
 
-    body {
-      background-image: var(--color-bg);
-      min-height: 100vh;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      overflow: hidden;
-      position: relative;
-    }
+      :root {
+        --color-bg: linear-gradient(to top, #00d4ff, #000);
+        --line-color: linear-gradient(to left top, #82ff86 20%, #144425, #104e1c);
+        --flower-center: radial-gradient(circle, #000, #ff5e00);
+        --leaf-color: radial-gradient(circle, #82ff86, #104e1c);
+        --petal-color: radial-gradient(circle, #ff5e00, #ffbb00);
+      }
 
-    .title {
-      position: absolute;
-      top: 5vmin;
-      width: 100%;
-      text-align: center;
-      font-family: 'Pacifico', cursive;
-      font-size: 5vmin;
-      color: #fff8d6;
-      text-shadow: 0 0 10px #000, 0 0 20px #000;
-      z-index: 20;
-    }
+      body {
+        background-image: var(--color-bg);
+        min-height: 100vh;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        overflow: hidden;
+      }
 
-    .flower_wrapper {
-      position: absolute;
-      bottom: 2vmin;
-      animation: moving-flower-1 4s linear infinite;
-    }
+      /* Titolo + cuoricino */
+      .title {
+        position: absolute;
+        top: 5vmin;
+        width: 100%;
+        text-align: center;
+        font-family: 'Pacifico', cursive;
+        font-size: 5vmin;
+        color: #fff8d6;
+        text-shadow: 0 0 10px #000, 0 0 20px #000;
+        z-index: 20;
+      }
 
-    .flower_stem {
-      width: 2vmin;
-      height: 65vmin;
-      background-image: var(--line-color);
-      border-radius: 4vmin;
-    }
+      .heart {
+        display: inline-block;
+        color: orange;
+        font-size: 5vmin;
+        margin-left: 1vmin;
+      }
 
-    .flower_center {
-      position: absolute;
-      top: 0vmin;
-      left: 50%;
-      transform: translateX(-50%) rotate(-10deg);
-      width: 20vmin;
-      height: 20vmin;
-      border-radius: 50%;
-      background: var(--flower-center);
-      animation: open-flower-middle 2s backwards;
-    }
+      /* Wrapper generale */
+      .sunflower {
+        position: relative;
+      }
 
-    .flower_petal {
-      position: absolute;
-      left: 50%;
-      bottom: 55vmin;
-      transform: translateX(-50%);
-      width: 7vmin;
-      height: 20vmin;
-      background: var(--petal-color);
-      clip-path: ellipse(50% 50% at 50% 50%);
-      transform-origin: center bottom;
-      animation: open-flower 2s backwards;
-    }
+      .flower_wrapper {
+        position: absolute;
+        bottom: 2vmin;
+        animation: moving-flower-1 4s linear infinite;
+      }
 
-    .flower_petal-1 { transform: translateX(-50%) rotate(0deg); }
-    .flower_petal-2 { transform: translateX(-50%) rotate(-30deg); }
-    .flower_petal-3 { transform: translateX(-50%) rotate(-60deg); }
-    .flower_petal-4 { transform: translateX(-50%) rotate(-90deg); }
-    .flower_petal-5 { transform: translateX(-50%) rotate(-120deg); }
-    .flower_petal-6 { transform: translateX(-50%) rotate(-150deg); }
-    .flower_petal-7 { transform: translateX(-50%) rotate(30deg); }
-    .flower_petal-8 { transform: translateX(-50%) rotate(60deg); }
-    .flower_petal-9 { transform: translateX(-50%) rotate(90deg); }
-    .flower_petal-10 { transform: translateX(-50%) rotate(120deg); }
-    .flower_petal-11 { transform: translateX(-50%) rotate(150deg); }
-    .flower_petal-12 { transform: translateX(-50%) rotate(180deg); }
+      .flower_stem {
+        width: 2vmin;
+        height: 65vmin;
+        background-image: var(--line-color);
+        border-radius: 4vmin;
+      }
 
-    .flower_leaf {
-      position: absolute;
-      left: 60%;
-      bottom: 18vmin;
-      transform: translateX(-45%) rotate(80deg);
-      width: 7vmin;
-      height: 17vmin;
-      background: var(--leaf-color);
-      border-radius: 10vmin 2vmin 10vmin 2vmin;
-      transform-origin: center bottom;
-    }
+      .flower_center {
+        position: absolute;
+        top: 0vmin;
+        left: 50%;
+        transform: translateX(-50%) rotate(-10deg);
+        width: 20vmin;
+        height: 20vmin;
+        border-radius: 50%;
+        background: var(--flower-center);
+        z-index: 5;
+      }
 
-    .flower_leaf-2 {
-      bottom: 23vmin;
-      transform: translateX(-55%) rotate(-80deg);
-    }
+      .flower_petal {
+        position: absolute;
+        left: 50%;
+        bottom: 55vmin;
+        width: 7vmin;
+        height: 20vmin;
+        background: var(--petal-color);
+        clip-path: ellipse(50% 50% at 50% 50%);
+        transform-origin: center bottom;
+      }
 
-    @keyframes open-flower-middle {
-      0% { opacity: 0; transform: translateX(-50%) scale(0); }
-    }
+      .flower_petal-1 { border-radius: 50% 50% 50% / 80% 80% 20% 20%; }
+      .flower_petal-2 { transform: translateX(-50%) rotate(-30deg); }
+      .flower_petal-3 { transform: translateX(-50%) rotate(-60deg); }
+      .flower_petal-4 { transform: translateX(-50%) rotate(-90deg); }
+      .flower_petal-5 { transform: translateX(-50%) rotate(-120deg); }
+      .flower_petal-6 { transform: translateX(-50%) rotate(-150deg); }
+      .flower_petal-7 { transform: translateX(-50%) rotate(30deg); }
+      .flower_petal-8 { transform: translateX(-50%) rotate(60deg); }
+      .flower_petal-9 { transform: translateX(-50%) rotate(90deg); }
+      .flower_petal-10 { transform: translateX(-50%) rotate(120deg); }
+      .flower_petal-11 { transform: translateX(-50%) rotate(150deg); }
+      .flower_petal-12 { transform: translateX(-50%) rotate(180deg); }
 
-    @keyframes open-flower {
-      0% { transform: translateX(-50%) rotate(0); }
-    }
+      .flower_leaf {
+        position: absolute;
+        width: 7vmin;
+        height: 17vmin;
+        background: var(--leaf-color);
+        border-radius: 10vmin 2vmin 10vmin 2vmin;
+      }
+      .flower_leaf-1 { left: 60%; bottom: 18vmin; transform: translateX(-45%) rotate(80deg); }
+      .flower_leaf-2 { left: 60%; bottom: 23vmin; transform: translateX(-55%) rotate(-80deg); }
 
-  </style>
-</head>
-<body>
-  <div class="title">Auguri, principessa mia 🧡</div>
+      /* Lucine: rimangono uguali */
 
-  <script>
-    function createSunflower(delay) {
-      const flower = document.createElement("div");
-      flower.className = "flower_wrapper";
-      flower.style.left = Math.random() * 90 + "vw";
-      flower.style.animationDelay = delay + "s";
+      @keyframes moving-flower-1 {
+        0%,100% { transform: translateY(0); }
+        50% { transform: translateY(-1vmin); }
+      }
 
-      flower.innerHTML = `
+    </style>
+  </head>
+
+  <body>
+    <div class="title">
+      Auguri, principessa mia
+      <span class="heart">🧡</span>
+    </div>
+
+    <!-- 5 girasoli sfalsati -->
+    <div class="sunflower">
+      <!-- Girasole 1 -->
+      <div class="flower_wrapper" style="left: 20%; transform: scale(0.9);">
         <div class="flower_stem"></div>
-        <div class="flower_center" style="animation-delay:${delay + 0.4}s"></div>
-        ${Array.from({ length: 12 }, (_, i) =>
-          `<div class='flower_petal flower_petal-${i + 1}' style='animation-delay:${delay + 1}s'></div>`
-        ).join('')}
+        <div class="flower_center"></div>
+        <div class="flower_petal flower_petal-1"></div>
+        <div class="flower_petal flower_petal-2"></div>
+        <div class="flower_petal flower_petal-3"></div>
+        <div class="flower_petal flower_petal-4"></div>
+        <div class="flower_petal flower_petal-5"></div>
+        <div class="flower_petal flower_petal-6"></div>
+        <div class="flower_petal flower_petal-7"></div>
+        <div class="flower_petal flower_petal-8"></div>
+        <div class="flower_petal flower_petal-9"></div>
+        <div class="flower_petal flower_petal-10"></div>
+        <div class="flower_petal flower_petal-11"></div>
+        <div class="flower_petal flower_petal-12"></div>
         <div class="flower_leaf flower_leaf-1"></div>
         <div class="flower_leaf flower_leaf-2"></div>
-      `;
+      </div>
 
-      document.body.appendChild(flower);
-    }
+      <!-- Girasole 2 -->
+      <div class="flower_wrapper" style="left: 40%; transform: scale(1.1);">
+        <div class="flower_stem"></div>
+        <div class="flower_center"></div>
+        <div class="flower_petal flower_petal-1"></div>
+        <div class="flower_petal flower_petal-2"></div>
+        <div class="flower_petal flower_petal-3"></div>
+        <div class="flower_petal flower_petal-4"></div>
+        <div class="flower_petal flower_petal-5"></div>
+        <div class="flower_petal flower_petal-6"></div>
+        <div class="flower_petal flower_petal-7"></div>
+        <div class="flower_petal flower_petal-8"></div>
+        <div class="flower_petal flower_petal-9"></div>
+        <div class="flower_petal flower_petal-10"></div>
+        <div class="flower_petal flower_petal-11"></div>
+        <div class="flower_petal flower_petal-12"></div>
+        <div class="flower_leaf flower_leaf-1"></div>
+        <div class="flower_leaf flower_leaf-2"></div>
+      </div>
 
-    for (let i = 0; i < 5; i++) {
-      createSunflower(i * 0.8); // sequenza
-    }
-  </script>
-</body>
+      <!-- Girasole 3 -->
+      <div class="flower_wrapper" style="left: 55%; transform: scale(0.85);">
+        <div class="flower_stem"></div>
+        <div class="flower_center"></div>
+        <div class="flower_petal flower_petal-1"></div>
+        <div class="flower_petal flower_petal-2"></div>
+        <div class="flower_petal flower_petal-3"></div>
+        <div class="flower_petal flower_petal-4"></div>
+        <div class="flower_petal flower_petal-5"></div>
+        <div class="flower_petal flower_petal-6"></div>
+        <div class="flower_petal flower_petal-7"></div>
+        <div class="flower_petal flower_petal-8"></div>
+        <div class="flower_petal flower_petal-9"></div>
+        <div class="flower_petal flower_petal-10"></div>
+        <div class="flower_petal flower_petal-11"></div>
+        <div class="flower_petal flower_petal-12"></div>
+        <div class="flower_leaf flower_leaf-1"></div>
+        <div class="flower_leaf flower_leaf-2"></div>
+      </div>
+
+      <!-- Girasole 4 -->
+      <div class="flower_wrapper" style="left: 70%; transform: scale(1.05);">
+        <div class="flower_stem"></div>
+        <div class="flower_center"></div>
+        <div class="flower_petal flower_petal-1"></div>
+        <div class="flower_petal flower_petal-2"></div>
+        <div class="flower_petal flower_petal-3"></div>
+        <div class="flower_petal flower_petal-4"></div>
+        <div class="flower_petal flower_petal-5"></div>
+        <div class="flower_petal flower_petal-6"></div>
+        <div class="flower_petal flower_petal-7"></div>
+        <div class="flower_petal flower_petal-8"></div>
+        <div class="flower_petal flower_petal-9"></div>
+        <div class="flower_petal flower_petal-10"></div>
+        <div class="flower_petal flower_petal-11"></div>
+        <div class="flower_petal flower_petal-12"></div>
+        <div class="flower_leaf flower_leaf-1"></div>
+        <div class="flower_leaf flower_leaf-2"></div>
+      </div>
+
+      <!-- Girasole 5 -->
+      <div class="flower_wrapper" style="left: 85%; transform: scale(0.9);">
+        <div class="flower_stem"></div>
+        <div class="flower_center"></div>
+        <div class="flower_petal flower_petal-1"></div>
+        <div class="flower_petal flower_petal-2"></div>
+        <div class="flower_petal flower_petal-3"></div>
+        <div class="flower_petal flower_petal-4"></div>
+        <div class="flower_petal flower_petal-5"></div>
+        <div class="flower_petal flower_petal-6"></div>
+        <div class="flower_petal flower_petal-7"></div>
+        <div class="flower_petal flower_petal-8"></div>
+        <div class="flower_petal flower_petal-9"></div>
+        <div class="flower_petal flower_petal-10"></div>
+        <div class="flower_petal flower_petal-11"></div>
+        <div class="flower_petal flower_petal-12"></div>
+        <div class="flower_leaf flower_leaf-1"></div>
+        <div class="flower_leaf flower_leaf-2"></div>
+      </div>
+
+    </div>
+
+  </body>
 </html>
